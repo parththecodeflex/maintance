@@ -1,23 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Apartment Maintenance</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 50px;
-      background: #f2f2f2;
-    }
-    h1 { color: #333; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple SPA on GitHub</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: #f0f2f5;
+    color: #333;
+  }
+  header {
+    background: #4a90e2;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  nav {
+    background: white;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 4px #ccc;
+  }
+  nav button {
+    border: none;
+    background: none;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    color: #4a90e2;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  nav button.active, nav button:hover {
+    border-bottom: 3px solid #4a90e2;
+  }
+  main {
+    max-width: 720px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px #ddd;
+  }
+</style>
 </head>
 <body>
-  <h1>🏠 Apartment Maintenance Page</h1>
-  <p>📅 Next cleaning: Monday, May 27th</p>
-  <p>💰 Monthly Fee: ₹1500 | Pay via UPI: example@upi</p>
-  <p>📣 Water will be off from 2–5pm on May 25th</p>
+<header>
+  <h1>My Single Page App</h1>
+</header>
+<nav>
+  <button id="homeBtn" class="active">Home</button>
+  <button id="aboutBtn">About</button>
+  <button id="contactBtn">Contact</button>
+</nav>
+<main id="content">
+  <h2>Welcome to the Home page</h2>
+  <p>This is the content of the Home page. You can navigate using the buttons above.</p>
+</main>
+<script>
+  const homeBtn = document.getElementById('homeBtn');
+  const aboutBtn = document.getElementById('aboutBtn');
+  const contactBtn = document.getElementById('contactBtn');
+  const content = document.getElementById('content');
+
+  function setActive(button) {
+    [homeBtn, aboutBtn, contactBtn].forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+  }
+
+  homeBtn.onclick = () => {
+    setActive(homeBtn);
+    content.innerHTML = \`
+      <h2>Welcome to the Home page</h2>
+      <p>This is the content of the Home page. You can navigate using the buttons above.</p>
+    \`;
+  };
+
+  aboutBtn.onclick = () => {
+    setActive(aboutBtn);
+    content.innerHTML = \`
+      <h2>About This App</h2>
+      <p>This is a simple single-page application demonstrating navigation without page reloads.</p>
+    \`;
+  };
+
+  contactBtn.onclick = () => {
+    setActive(contactBtn);
+    content.innerHTML = \`
+      <h2>Contact Us</h2>
+      <p>If you want to get in touch, email us at <a href="mailto:contact@example.com">contact@example.com</a>.</p>
+    \`;
+  };
+</script>
 </body>
 </html>
+
