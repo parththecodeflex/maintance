@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -258,3 +258,139 @@
 </body>
 </html>
 
+ -->
+
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Maintenance Portal - [Your Apartment Name]</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>[Your Apartment Name] Resident Portal</h1>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#request-form-section">Submit Request</a>
+        <a href="#announcements-section">Announcements</a>
+        <a href="#contact-section">Contact</a>
+        <!-- You can add more links here, e.g., for rules, documents -->
+    </nav>
+
+    <main>
+        <section id="home">
+            <h2>Welcome, Residents!</h2>
+            <p>
+                This portal is your go-to place for submitting maintenance requests
+                and staying updated with important building announcements.
+            </p>
+            <p>
+                To report an issue, please navigate to the "Submit Request" section.
+            </p>
+        </section>
+
+        <section id="request-form-section">
+            <h2>Submit a Maintenance Request</h2>
+            <p>Please fill out the form below with as much detail as possible.</p>
+            <form id="maintenanceForm">
+                <div>
+                    <label for="aptNumber">Apartment Number:</label>
+                    <input type="text" id="aptNumber" name="aptNumber" required>
+                </div>
+
+                <div>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div>
+                    <label for="phone">Your Phone Number (Optional):</label>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g., 555-123-4567">
+                </div>
+
+                <div>
+                    <label for="email">Your Email (Optional, for updates):</label>
+                    <input type="email" id="email" name="email" placeholder="e.g., resident@example.com">
+                </div>
+
+                <div>
+                    <label for="issueType">Type of Issue:</label>
+                    <select id="issueType" name="issueType" required>
+                        <option value="">--Please Select an Issue Type--</option>
+                        <option value="Plumbing">Plumbing (e.g., leak, clog, no hot water)</option>
+                        <option value="Electrical">Electrical (e.g., outlet not working, light fixture)</option>
+                        <option value="Appliance">Appliance (e.g., fridge, oven, dishwasher)</option>
+                        <option value="HVAC">Heating/Cooling (e.g., AC not working, no heat)</option>
+                        <option value="Pest Control">Pest Control</option>
+                        <option value="Doors/Windows/Locks">Doors/Windows/Locks</option>
+                        <option value="General Repair">General Common Area Repair</option>
+                        <option value="Other">Other (Please describe below)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="description">Detailed Description of Issue:</label>
+                    <textarea id="description" name="description" rows="5" required placeholder="Please provide specific details, location of the issue, etc."></textarea>
+                </div>
+
+                <div>
+                    <label for="permission">Permission to Enter if Not Home?</label>
+                    <select id="permission" name="permission" required>
+                        <option value="Yes">Yes, you have permission to enter if I am not home.</option>
+                        <option value="No">No, please contact me to schedule entry.</option>
+                    </select>
+                </div>
+
+                <!-- (Optional) File Upload - This makes the Google Apps Script more complex
+                     and usually requires the user to be logged into a Google account to submit the form.
+                     For simplicity in the initial setup, we often omit this.
+                <div>
+                    <label for="photo">Upload Photo (Optional):</label>
+                    <input type="file" id="photo" name="photo" accept="image/*">
+                </div>
+                -->
+
+                <button type="submit">Submit Request</button>
+            </form>
+            <div id="form-message"></div> <!-- This div will display success or error messages from script.js -->
+        </section>
+
+        <section id="announcements-section">
+            <h2>Building Announcements</h2>
+            <div class="announcement">
+                <h4>Scheduled Maintenance: Elevators - [Date]</h4>
+                <p>Please be advised that the main elevator will be out of service for scheduled maintenance on [Date] from [Time] to [Time]. Please use the stairs or the service elevator during this period. We apologize for any inconvenience.</p>
+            </div>
+            <div class="announcement">
+                <h4>Reminder: Recycling Pickup Change</h4>
+                <p>Friendly reminder that recycling pickup is now on Wednesdays. Please ensure your bins are out by 7 AM.</p>
+            </div>
+            <!-- Add more announcements here manually -->
+        </section>
+
+        <section id="contact-section">
+            <h2>Contact Information</h2>
+            <p><strong>Management Office:</strong> [Phone Number] / [Email Address]</p>
+            <p><strong>Emergency Maintenance (After Hours):</strong> [Emergency Phone Number]</p>
+            <p><strong>Office Hours:</strong> [e.g., Monday - Friday, 9 AM - 5 PM]</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="currentYear"></span> [Your Apartment Name] Management. All rights reserved.</p>
+        <!-- You can add a link to a privacy policy or terms of service if needed -->
+    </footer>
+
+    <script>
+        // Simple script to set the current year in the footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+    <script src="script.js"></script> <!-- This links to your JavaScript file for form handling -->
+</body>
+</html>
