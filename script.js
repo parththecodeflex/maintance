@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. Get references to the HTML elements we'll interact with.
     const form = document.getElementById('maintenanceForm'); // The <form> element
     const formMessage = document.getElementById('form-message'); // The <div> for showing messages
-    const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'; // << IMPORTANT: REPLACE THIS
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw17BWYxgfnTOTkSGTB86pdCxW4SqRoAZGXttj2JB4nHvaGZHIAgmsnk7DOXYfBMeWk_Q/exec'; // << IMPORTANT: REPLACE THIS
 
     // 3. Add an event listener to the form for when it's submitted.
     form.addEventListener('submit', function(e) {
