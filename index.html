@@ -3,98 +3,257 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Simple SPA on GitHub</title>
+<title>Apartment Maintenance Tracker</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     margin: 0;
-    background: #f0f2f5;
+    padding: 0;
     color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   header {
-    background: #4a90e2;
+    padding: 1rem 2rem;
     color: white;
-    padding: 1rem;
     text-align: center;
-  }
-  nav {
-    background: white;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 0.5rem 0;
-    box-shadow: 0 2px 4px #ccc;
-  }
-  nav button {
-    border: none;
-    background: none;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    color: #4a90e2;
-    border-bottom: 3px solid transparent;
-    transition: border-color 0.3s ease;
-  }
-  nav button.active, nav button:hover {
-    border-bottom: 3px solid #4a90e2;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
   }
   main {
-    max-width: 720px;
-    margin: 2rem auto;
     background: white;
+    margin: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     padding: 2rem;
+    width: 95%;
+    max-width: 900px;
+  }
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+  }
+  label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  input, select, textarea {
+    padding: 0.5rem;
     border-radius: 6px;
-    box-shadow: 0 4px 10px #ddd;
+    border: 1.5px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 6px #667eea;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .full-width {
+    grid-column: span 2;
+  }
+  button {
+    grid-column: span 2;
+    background: #667eea;
+    color: white;
+    padding: 0.75rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    box-shadow: 0 4px 10px rgba(102,126,234,0.6);
+  }
+  button:hover {
+    background: #5a6cd8;
+  }
+  section.entries {
+    margin-top: 2rem;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  thead {
+    background: #667eea;
+    color: white;
+  }
+  th, td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  tbody tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+  .export-btn {
+    margin-top: 1rem;
+    background: #764ba2;
+  }
+  .export-btn:hover {
+    background: #623a86;
+  }
+  footer {
+    color: white;
+    padding: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    flex-shrink: 0;
   }
 </style>
 </head>
 <body>
-<header>
-  <h1>My Single Page App</h1>
-</header>
-<nav>
-  <button id="homeBtn" class="active">Home</button>
-  <button id="aboutBtn">About</button>
-  <button id="contactBtn">Contact</button>
-</nav>
-<main id="content">
-  <h2>Welcome to the Home page</h2>
-  <p>This is the content of the Home page. You can navigate using the buttons above.</p>
-</main>
-<script>
-  const homeBtn = document.getElementById('homeBtn');
-  const aboutBtn = document.getElementById('aboutBtn');
-  const contactBtn = document.getElementById('contactBtn');
-  const content = document.getElementById('content');
+<header>Apartment Maintenance Tracker</header>
+<main>
+  <form id="maintenance-form">
+    <div>
+      <label for="apt-number">Apartment Number</label>
+      <input type="text" id="apt-number" name="aptNumber" placeholder="e.g. 101" required />
+    </div>
+    <div>
+      <label for="date-reported">Date Reported</label>
+      <input type="date" id="date-reported" name="dateReported" required />
+    </div>
+    <div class="full-width">
+      <label for="issue-desc">Issue Description</label>
+      <textarea id="issue-desc" name="issueDescription" placeholder="Describe the maintenance issue" required></textarea>
+    </div>
+    <div>
+      <label for="status">Status</label>
+      <select id="status" name="status" required>
+        <option value="" disabled selected>Select status</option>
+        <option value="Reported">Reported</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+        <option value="Pending">Pending</option>
+      </select>
+    </div>
+    <div>
+      <label for="assigned-to">Assigned To</label>
+      <input type="text" id="assigned-to" name="assignedTo" placeholder="Maintenance staff" />
+    </div>
+    <button type="submit">Add Maintenance Record</button>
+  </form>
 
-  function setActive(button) {
-    [homeBtn, aboutBtn, contactBtn].forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
+  <section class="entries">
+    <table id="records-table" aria-label="Maintenance Records">
+      <thead>
+        <tr>
+          <th>Apartment Number</th>
+          <th>Date Reported</th>
+          <th>Issue Description</th>
+          <th>Status</th>
+          <th>Assigned To</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button class="export-btn" id="export-btn">Export to Excel</button>
+  </section>
+</main>
+<footer>© 2024 Apartment Maintenance Tracker</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+  const STORAGE_KEY = 'apartmentMaintenanceRecords';
+  const form = document.getElementById('maintenance-form');
+  const tableBody = document.querySelector('#records-table tbody');
+  const exportBtn = document.getElementById('export-btn');
+
+  let records = [];
+
+  // Load records from localStorage on page load
+  window.addEventListener('load', () => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        records = JSON.parse(stored);
+        records.forEach(addRecordToTable);
+      } catch (err) {
+        console.error('Failed to parse stored records:', err);
+        records = [];
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const aptNumber = form.aptNumber.value.trim();
+    const dateReported = form.dateReported.value;
+    const issueDescription = form.issueDescription.value.trim();
+    const status = form.status.value;
+    const assignedTo = form.assignedTo.value.trim();
+
+    if (!aptNumber || !dateReported || !issueDescription || !status) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    const record = {
+      'Apartment Number': aptNumber,
+      'Date Reported': dateReported,
+      'Issue Description': issueDescription,
+      'Status': status,
+      'Assigned To': assignedTo || "-"
+    };
+
+    records.push(record);
+    saveRecords();
+    addRecordToTable(record);
+    form.reset();
+  });
+
+  function addRecordToTable(record) {
+    const row = document.createElement('tr');
+    for (const key of ['Apartment Number', 'Date Reported', 'Issue Description', 'Status', 'Assigned To']) {
+      const cell = document.createElement('td');
+      // Format the date nicely
+      if(key === 'Date Reported') {
+        cell.textContent = new Date(record[key]).toLocaleDateString();
+      } else {
+        cell.textContent = record[key];
+      }
+      row.appendChild(cell);
+    }
+    tableBody.appendChild(row);
   }
 
-  homeBtn.onclick = () => {
-    setActive(homeBtn);
-    content.innerHTML = \`
-      <h2>Welcome to the Home page</h2>
-      <p>This is the content of the Home page. You can navigate using the buttons above.</p>
-    \`;
-  };
+  function saveRecords() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    } catch (err) {
+      console.error('Error saving to localStorage:', err);
+    }
+  }
 
-  aboutBtn.onclick = () => {
-    setActive(aboutBtn);
-    content.innerHTML = \`
-      <h2>About This App</h2>
-      <p>This is a simple single-page application demonstrating navigation without page reloads.</p>
-    \`;
-  };
-
-  contactBtn.onclick = () => {
-    setActive(contactBtn);
-    content.innerHTML = \`
-      <h2>Contact Us</h2>
-      <p>If you want to get in touch, email us at <a href="mailto:contact@example.com">contact@example.com</a>.</p>
-    \`;
-  };
+  exportBtn.addEventListener('click', () => {
+    if(records.length === 0) {
+      alert('No records to export.');
+      return;
+    }
+    const worksheet = XLSX.utils.json_to_sheet(records);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Maintenance Records");
+    XLSX.writeFile(workbook, "apartment_maintenance_records.xlsx");
+  });
 </script>
 </body>
 </html>
